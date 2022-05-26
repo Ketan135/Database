@@ -24,7 +24,10 @@ insert into Person values('Ravi','7',26,'India')
 insert into Person values('Sachin','8',26,'India')
 insert into Person values('Santosh','9',26,'India')
 insert into Person values('Rohit','10',26,'India')
-update Person set age=27 where personId=2
+insert into Person values('Rohit','11',26,'Null')
+insert into Person values('Rohit','12',26,'Null')
+insert into Person values('Rohit','13',26,'')
+update Person set Country='India' where personId=13
 select personName,age from Person where personnId=1
 select * from Person where personId<3
 select * from Person where personId<>3
@@ -47,6 +50,8 @@ select * from Person where personName like '_k'
 select * from Person where personName like 'R_'
 select * from Person where personName like '[kR]%'
 select * from Person where personName like '[k-R]%'
+select * from Person where Country  is Null
+select * from Person where Country  is not null
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
 create table Course(
 Id int,
@@ -76,3 +81,41 @@ constraint pk_order primary key(orderId),
 constraint pk_order_perrson foreign key(personId) references Person(personId)	
 )
 sp_help Orders 
+---------------------------------------------------------------------------------------------------------------------------------------------------
+create table employee(
+Emp_Id int ,
+First_Name varchar(20),
+Last_Name varchar(20),
+Salary int,
+City varchar(20),
+Dept_Name varchar(20)
+constraint pk_emp primary key(Emp_Id)
+)
+sp_help employee
+insert into employee values(1,'Ketan','Haridas','30000','Pune','Developer')
+insert into employee values(2,'Rohit','Kumar','23000','Pune','Developer')
+insert into employee values(3,'Raj','Chavan','30000','Mumbai','Analyst')
+insert into employee values(4,'Rahul','Joshi','40000','Pune','HR')
+insert into employee values(5,'Sahil','Agrawal','35000','Banglore','Sales')
+insert into employee values(6,'Rakesh','Sawant','32000','Mumbai','Delhi')
+insert into employee values(7,'Parth','Kulkarni','30000','Pune','QA')
+insert into employee values(8,'Nikhil','Bhate','25000','Mumbai','Sales')
+insert into employee values(9,'Jeevan','Chavan','30000','Pune','Tech')
+insert into employee values(10,'Abhi','Das','30000','Pune','Developer')
+
+select * from employee
+select * from employee where Dept_Name='Sales'	
+select * from employee where Salary>35000
+select * from employee where Salary>35000
+select * from employee where Dept_Name in('Pune','Mumbai')
+select * from employee where Salary between 25000 and 30000
+select * from employee where  First_Name like 'T%'
+select * from employee where Last_Name like '_A'
+select distinct Dept_Name from employee
+select * from employee where Dept_Name not in('HR','Sales')
+select count(distinct City)from employee
+select count(*) from employee
+select sum(Salary) as SumSalary From employee
+select avg(Salary) as avgSalary From employee
+select max(Salary) as maxSalary From employee
+select min(Salary) as minSalary From employee
