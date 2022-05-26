@@ -45,6 +45,8 @@ select * from Person where personName like '%P'
 select * from Person where personName like '%k%'
 select * from Person where personName like '_k'
 select * from Person where personName like 'R_'
+select * from Person where personName like '[kR]%'
+select * from Person where personName like '[k-R]%'
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
 create table Course(
 Id int,
