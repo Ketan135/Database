@@ -132,16 +132,16 @@ Dept_Id int,
 Dept_Name varchar(20)
 constraint pk_emp1 primary key(Emp_Id)
 )
-insert into employee1 values(1,'Ketan',30000,'Pune',1,'Developer')
-insert into employee1 values(2,'Rohit',23000,'Pune',1,'Developer')
-insert into employee1 values(3,'Raj',30000,'Mumbai',2,'Analyst')
-insert into employee1 values(4,'Rahul',40000,'Pune',3,'HR')
-insert into employee1 values(5,'Sahil',35000,'Banglore',4,'Sales')
-insert into employee1 values(6,'Rakesh',32000,'Mumbai',1,'Developer')
-insert into employee1 values(7,'Parth',30000,'Pune',5,'QA')
-insert into employee1 values(8,'Nikhil',25000,'Mumbai',4,'Sales')
-insert into employee1 values(9,'Jeevan',30000,'Pune',9,'Tech')
-insert into employee1 values(10,'Abhi',30000,'Pune',1,'Developer')
+	insert into employee1 values(1,'Ketan',30000,'Pune',1,'Developer')
+	insert into employee1 values(2,'Rohit',23000,'Pune',1,'Developer')
+	insert into employee1 values(3,'Raj',30000,'Mumbai',2,'Analyst')
+	insert into employee1 values(4,'Rahul',40000,'Pune',3,'HR')
+	insert into employee1 values(5,'Sahil',35000,'Banglore',4,'Sales')
+	insert into employee1 values(6,'Rakesh',32000,'Mumbai',1,'Developer')
+	insert into employee1 values(7,'Parth',30000,'Pune',5,'QA')
+	insert into employee1 values(8,'Nikhil',25000,'Mumbai',4,'Sales')
+	insert into employee1 values(9,'Jeevan',30000,'Pune',9,'Tech')
+	insert into employee1 values(10,'Abhi',30000,'Pune',1,'Developer')
 
 select name "Name" from employee1
 select distinct Dept_Id FROM employee1
@@ -152,6 +152,7 @@ select max(Salary) as maxSalary From employee1
 select min(Salary) as minSalary From employee1
 select count(*)from employee1
 select count(distinct Dept_Id)from employee1
+select top 5 * from employee1
 select upper(Name) from employee1
 select City,count(Emp_Id) as EmpCount from employee1 group by City
 select distinct City from employee1
@@ -162,7 +163,9 @@ select * from employee1 where City='Pune'and Dept_Id=1
 select * from employee1 where City ='Pune'OR City='Mumbai'
 select * from employee1 order by City asc
 select * from employee1 order by City desc
+select * from employee1 order by Name,City
 select * from employee1 where Dept_Id is null
+select * from employee1 where Dept_Id is not null
 delete from employee1 where City ='Banglore'
 select * from employee1
 select avg(Salary) as avgSalary From employee1
@@ -170,3 +173,140 @@ select min(Salary) as minSalary From employee1
 select max(Salary) as maxSalary From employee1
 select * from employee1 where City like 'P%'
 select * from employee1 where City like '%i'
+select * from employee1 where City like '_u%'
+select * from employee1 where City like 'P%e'
+----------------------------------------------------------------------------------------------------------------------------
+select * from Person
+select * from Orders
+alter table Orders add productname varchar(20)
+alter table Orders add price int
+
+insert into Orders values(1,1001,1,'keyboard',999)
+insert into Orders values(2,1002,1,'Mouse',500)
+insert into Orders values(3,1003,5,'Laptop',30000)
+insert into Orders values(4,1004,5,'Mobile',15000)
+insert into Orders values(5,1005,5,'LED',20000)
+insert into Orders values(6,1006,9,'headphone',999)
+insert into Orders values(7,1007,9,'Mouse',999)
+
+select p.personName,p.country,o.orderNo,o.productname,o.price
+from Person p
+inner join Orders o on o.personId=p.personId
+select p.personName,p.country,o.orderNo,o.productname,o.price
+from Person p
+left join Orders o on o.personId=p.personId
+select p.personName,p.country,o.orderNo,o.productname,o.price
+from Person p
+right join Orders o on o.personId=p.personId
+
+create table manager(
+id int primary key,
+name varchar(20)
+)
+select * from employee1
+alter table employee1 add managerid int
+update employee1 set managerid=1 where Emp_Id in(2,3)
+update employee1 set managerid=4 where Emp_Id in(5,6,7,8)
+update employee1 set managerid=9 where Emp_Id in(10)
+
+select e1.Name as empName,e2.name as managerName
+from employee1 e1,employee1 e2
+where e1.managerid=e2.Emp_Id
+
+create table Study(
+studId varchar(5),
+courseId varchar(5),
+year int
+)
+insert into Study values('s1','c1',2016)
+insert into Study values('s2','c2',2017)
+insert into Study values('s1','c2',2017)
+select * from Study
+
+select s.studId,s.courseId,s.year
+from Study s,Study sa
+where s.studId=sa.studId and s.courseId<>sa.courseId	
+
+create table employee2(
+Emp_Id int ,
+Name varchar(20),
+Salary int,
+City varchar(20),
+constraint pk_emp2 primary key(Emp_Id)
+)
+
+insert into employee2 values(1,'Ketan',30000,'Pune')
+insert into employee2 values(2,'Rohit',23000,'Pune')
+insert into employee2 values(3,'Raj',30000,'Mumbai')
+insert into employee2 values(4,'Rahul',40000,'Pune')
+insert into employee2 values(5,'Sahil',35000,'Banglore')
+insert into employee2 values(6,'Rakesh',32000,'Mumbai')
+insert into employee2 values(7,'Parth',30000,'Pune')
+insert into employee2 values(8,'Nikhil',25000,'Mumbai')
+insert into employee2 values(9,'Jeevan',30000,'Pune')
+insert into employee2 values(10,'Abhi',30000,'Pune')
+
+alter table employee2 
+
+
+create table dept(
+did int primary key,
+dname varchar(20)
+)
+insert into dept values(1,'Sales')
+insert into dept values(2,'Developer')
+insert into dept values(3,'Analyst')
+insert into dept values(4,'QA')
+insert into dept values(5,'Sales')
+insert into dept values(6,'Developer')
+insert into dept values(7,'HR')
+insert into dept values(8,'QA')
+insert into dept values(9,'HR')
+insert into dept values(10,'Support')
+
+
+select * from employee2
+update employee2 set did=1 where Emp_Id in(2,3)
+update employee2 set did=4 where Emp_Id in(5,6,7,8)
+update employee2 set did=9 where Emp_Id in(10)
+
+select e.Emp_Id,e.Name,e.Salary,e.City,e.did,d.dname
+from employee2 e inner join dept d on e.did=d.did 
+
+select e.Emp_Id,e.Name,e.Salary,e.City,d.did,d.dname
+from employee2 e 
+inner join dept d on e.did = d.did
+where d.dname='HR'
+order by salary desc
+
+select e.Name,d.did,d.dname
+from employee1 e 
+inner join dept d on e.Dept_Id = d.did
+where d.dname='sales'
+order by Name
+
+select e.Name,e.Salary,d.did,d.dname
+from employee2 e 
+inner join dept d on e.did = d.did
+order by Name,Salary
+-----------------------------------------------------------------------------------------------------------------
+select * from employee1
+select Country,count(personId)from Person group by Country having count(personId)>5
+
+select Country,count(personId)from Person group by Country 
+having Country in ('India','USA')order by count(personId)
+
+select Country,count(personId)from Person group by Country having count(personId)>5
+select Dept_Name,count (Dept_Id)as empcount from employee1 
+group by Dept_Name having Dept_Name in('HR','Sales')
+order by count(Dept_Id)
+------------------------------------------------------------------------------------------------------------------
+select SUBSTRING(Name,0,3)as tempname from employee1 where Emp_Id=2
+select CONCAT(Name,' ',City)as info from employee1
+select Name,LEN(Name)as length from employee1
+select UPPER(Name)as name from employee1
+select lower(Name)as name from employee1
+select ROUND(Salary,2)as Salary from employee1
+select CAST(Salary as varchar(20))from employee1
+select REVERSE(Name)as reversename from employee1
+select REPLACE(Name,'Raj','vijay')as info from employee1 where Emp_Id=3
