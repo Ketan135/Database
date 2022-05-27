@@ -310,3 +310,154 @@ select ROUND(Salary,2)as Salary from employee1
 select CAST(Salary as varchar(20))from employee1
 select REVERSE(Name)as reversename from employee1
 select REPLACE(Name,'Raj','vijay')as info from employee1 where Emp_Id=3
+-------------------------------------------------------------------------------------------------------------------
+create table salesman(
+sId int primary key,
+sName varchar(20),
+sCity varchar(20),
+sCommision int
+)
+insert into salesman values(1,'Raj','Pune',200)
+insert into salesman values(2,'Raju','Mumbai',200)
+insert into salesman values(3,'Tushar','Delhi',200)
+insert into salesman values(4,'Sagar','Pune',200)
+insert into salesman values(5,'Ashish','Banglore',200)
+
+
+create table customer(
+cId int primary key,
+cName varchar(20),
+cCity varchar(20),
+cGrade varchar(5),
+foreign key(cId) references salesman(sId)	
+)
+insert into customer values(1,'Vishal','Pune','A+')
+insert into customer values(2,'Sumit','Mumbai','B++')
+insert into customer values(3,'Onkar','Bakglore','A')
+insert into customer values(4,'Shivam','Pune','B')
+insert into customer values(5,'Santosh','Dalhi','A+')
+
+
+create table orders(
+oId int,
+Purchase_Amount int,
+date date,
+foreign key(oId) references customer(cId),
+foreign key(oId) references salesman(sId)
+)
+insert into orders values(1,500,GETDATE())
+insert into orders values(2,700,GETDATE())
+insert into orders values(3,850,GETDATE())
+insert into orders values(4,400,GETDATE())
+insert into orders values(5,200,GETDATE())
+
+select o.oId,c.cName,s.sName,o.purchase_Amount
+from orders o
+inner join customer c on c.cId=o.oId
+inner join salesman s on s.sId=o.oId
+
+select o.oId,c.cName,s.sName
+from orders o
+inner join customer c on c.cId=o.oId
+inner join salesman s on s.sId=o.oId
+
+select s.sId,s.sName
+from orders o 
+inner join salesman s on s.sId=o.oId
+order by sName asc
+
+select s.sId,s.sName
+from orders o 
+inner join salesman s on s.sId=o.oId
+order by sName desc
+
+select c.cName,c.cGrade
+from orders o
+inner join customer c on c.cId=o.oId
+
+select o.oId,o.purchase_Amount,o.date
+from orders o
+inner join customer c on c.cId=o.oId
+inner join salesman s on s.sId=o.oId
+
+select o.oId,o.purchase_Amount
+from orders o
+inner join customer c on c.cId=o.oId
+inner join salesman s on s.sId=o.oId
+
+select c.cId,c.cGrade,c.cName,c.cName,o.oId
+from orders o
+inner join customer c on c.cId=o.oId
+inner join salesman s on s.sId=o.oId
+
+select o.oId,o.purchase_Amount
+from orders o
+left join customer c on c.cId=o.oId
+left join salesman s on s.sId=o.oId
+
+select o.oId,c.cName,s.sName,o.purchase_Amount
+from orders o
+left join customer c on c.cId=o.oId
+left join salesman s on s.sId=o.oId
+
+select o.oId,date,c.cName,c.cGrade,c.cCity,s.sName,s.sCity,s.sCommision,o.purchase_Amount
+from orders o
+left join customer c on c.cId=o.oId
+left join salesman s on s.sId=o.oId
+
+select o.oId,date,c.cName,c.cGrade,c.cCity,s.sName,s.sCity,s.sCommision,o.purchase_Amount
+from orders o
+right join customer c on c.cId=o.oId
+right join salesman s on s.sId=o.oId
+
+select c.cId,c.cName,c.cCity,o.oId
+from orders o 
+inner join customer c on c.cId = o.oId
+where c.cCity='Pune'
+
+select c.cId,c.cName,c.cGrade
+from orders o 
+inner join customer c on c.cId = o.oId
+where c.cGrade='A+'
+
+select c.cId,c.cName,c.cGrade
+from orders o 
+inner join customer c on c.cId = o.oId
+where c.cGrade='B++'
+
+select c.cId,c.cName,c.cCity,c.cGrade
+from orders o 
+inner join customer c on c.cId = o.oId
+inner join salesman s on s.sId=o.oId
+order by cName asc
+
+select c.cId,c.cName,c.cCity,c.cGrade
+from orders o 
+inner join customer c on c.cId = o.oId
+inner join salesman s on s.sId=o.oId
+order by cName desc
+
+select s.sId,s.sName
+from orders o 
+inner join salesman s on s.sId=o.oId
+order by sName asc
+
+select s.sId,s.sName
+from orders o 
+inner join salesman s on s.sId=o.oId
+order by sName desc
+
+select c.cId,c.cName,o.purchase_Amount
+from orders o
+inner join customer c on c.cId = o.oId
+order by Purchase_Amount
+
+
+
+
+
+
+
+
+
+
