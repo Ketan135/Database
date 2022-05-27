@@ -119,3 +119,54 @@ select sum(Salary) as SumSalary From employee
 select avg(Salary) as avgSalary From employee
 select max(Salary) as maxSalary From employee
 select min(Salary) as minSalary From employee
+select City,count(Emp_Id) as EmpCount from employee group by City
+select * from employee
+select Salary,Salary=Salary*0.12 from employee
+--------------------------------------------------------------------------------------------------------------------------
+create table employee1(
+Emp_Id int ,
+Name varchar(20),
+Salary int,
+City varchar(20),
+Dept_Id int,
+Dept_Name varchar(20)
+constraint pk_emp1 primary key(Emp_Id)
+)
+insert into employee1 values(1,'Ketan',30000,'Pune',1,'Developer')
+insert into employee1 values(2,'Rohit',23000,'Pune',1,'Developer')
+insert into employee1 values(3,'Raj',30000,'Mumbai',2,'Analyst')
+insert into employee1 values(4,'Rahul',40000,'Pune',3,'HR')
+insert into employee1 values(5,'Sahil',35000,'Banglore',4,'Sales')
+insert into employee1 values(6,'Rakesh',32000,'Mumbai',1,'Developer')
+insert into employee1 values(7,'Parth',30000,'Pune',5,'QA')
+insert into employee1 values(8,'Nikhil',25000,'Mumbai',4,'Sales')
+insert into employee1 values(9,'Jeevan',30000,'Pune',9,'Tech')
+insert into employee1 values(10,'Abhi',30000,'Pune',1,'Developer')
+
+select name "Name" from employee1
+select distinct Dept_Id FROM employee1
+select * from employee1 order by Name desc
+select Salary,Salary=Salary*0.12 from employee1
+select sum(Salary) from employee1
+select max(Salary) as maxSalary From employee1
+select min(Salary) as minSalary From employee1
+select count(*)from employee1
+select count(distinct Dept_Id)from employee1
+select upper(Name) from employee1
+select City,count(Emp_Id) as EmpCount from employee1 group by City
+select distinct City from employee1
+select * from employee1 where City='pune'
+select * from employee1 where not City= 'Pune'
+select * from employee1 where Emp_Id =1
+select * from employee1 where City='Pune'and Dept_Id=1
+select * from employee1 where City ='Pune'OR City='Mumbai'
+select * from employee1 order by City asc
+select * from employee1 order by City desc
+select * from employee1 where Dept_Id is null
+delete from employee1 where City ='Banglore'
+select * from employee1
+select avg(Salary) as avgSalary From employee1
+select min(Salary) as minSalary From employee1
+select max(Salary) as maxSalary From employee1
+select * from employee1 where City like 'P%'
+select * from employee1 where City like '%i'
